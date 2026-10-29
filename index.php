@@ -1,0 +1,11 @@
+<?php
+$pageTitle = 'Reserve your time';
+require __DIR__ . '/includes/header.php';
+?>
+<section class="hero container">
+    <div class="hero-copy reveal"><p class="eyebrow">GYM ACCESS, SIMPLIFIED</p><h1>Your workout.<br><em>Your time.</em></h1><p class="hero-text">Reserve shared gym equipment before you arrive and spend less time waiting, more time moving.</p><div class="hero-actions"><a class="button button-primary" href="equipment.php">Book equipment <span aria-hidden="true">-></span></a><?php if (empty($_SESSION['user_id'])): ?><a class="button button-quiet" href="login.php">I have an account</a><?php endif; ?></div><p class="hero-note"><span class="pulse-dot"></span> Open daily from 06:00 to 21:00</p></div>
+    <div class="hero-visual reveal"><div class="visual-label">TODAY'S FLOW <strong>06:00 - 21:00</strong></div><div class="hero-image"><span>MOVE WITH INTENT</span></div><div class="floating-stat"><strong>08</strong><span>equipment<br>stations</span></div></div>
+</section>
+<section class="features-band"><div class="container feature-grid"><article class="feature"><span>01</span><div><h3>Easy booking</h3><p>Pick a station, choose a slot, and lock it in.</p></div></article><article class="feature"><span>02</span><div><h3>Live availability</h3><p>See the schedule before you leave campus.</p></div></article><article class="feature"><span>03</span><div><h3>No waiting</h3><p>Your time is reserved, so your focus stays yours.</p></div></article></div></section>
+<section class="preview container"><div class="section-heading"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Popular stations.</h2></div><a class="text-link" href="equipment.php">View all equipment <span aria-hidden="true">-></span></a></div><div class="equipment-preview"><?php foreach ([['Treadmill','Cardio','RUN'],['Bench Press','Strength','LIFT'],['Exercise Bike','Cardio','RIDE']] as $item): ?><article class="equipment-card"><div class="equipment-photo photo-<?= strtolower(str_replace(' ', '-', $item[0])) ?>"><span><?= e($item[2]) ?></span></div><div class="equipment-info"><div><h3><?= e($item[0]) ?></h3><p><?= e($item[1]) ?></p></div><span class="status available">Available</span></div></article><?php endforeach; ?></div></section>
+<?php require __DIR__ . '/includes/footer.php'; ?>

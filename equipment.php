@@ -1,0 +1,5 @@
+<?php
+require_once __DIR__ . '/config/auth.php';
+$equipment = $pdo->query('SELECT * FROM equipment ORDER BY id')->fetchAll();
+$pageTitle = 'Equipment'; require __DIR__ . '/includes/header.php';
+?><section class="page-intro container"><p class="eyebrow">THE FLOOR</p><h1>Choose your station.</h1><p>Reserve a focused block for the equipment you need.</p></section><section class="equipment-grid container"><?php foreach ($equipment as $item): ?><article class="equipment-card"><div class="equipment-photo photo-<?= e($item['image']) ?>"><span><?= e(strtoupper(substr($item['category'], 0, 5))) ?></span></div><div class="equipment-info"><div><h3><?= e($item['name']) ?></h3><p><?= e($item['category']) ?></p></div><span class="status <?= $item['status'] === 'available' ? 'available' : 'maintenance' ?>"><?= e(ucfirst($item['status'])) ?></span></div><?php if ($item['status'] === 'available'): ?><a class="button button-small button-primary" href="book.php?equipment_id=<?= (int) $item['id'] ?>">Book now</a><?php endif; ?></article><?php endforeach; ?></section><?php require __DIR__ . '/includes/footer.php'; ?>

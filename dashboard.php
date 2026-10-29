@@ -1,0 +1,5 @@
+<?php
+require_once __DIR__ . '/config/auth.php'; require_login();
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE user_id = ? AND status = 'confirmed' AND booking_date >= CURDATE()"); $stmt->execute([$_SESSION['user_id']]); $upcoming = (int) $stmt->fetchColumn();
+$pageTitle = 'Dashboard'; require __DIR__ . '/includes/header.php';
+?><section class="page-intro container"><p class="eyebrow">MEMBER DASHBOARD</p><h1>Good to see you, <?= e($_SESSION['name']) ?>.</h1><p>Plan your next session and keep your schedule moving.</p></section><section class="dashboard-grid container"><div class="metric"><span>Upcoming bookings</span><strong><?= $upcoming ?></strong></div><div class="metric metric-dark"><span>Gym hours</span><strong>06-21</strong><small>Every day</small></div><div class="dashboard-action"><p class="eyebrow">MAKE A MOVE</p><h2>Reserve your next station.</h2><a class="button button-primary" href="equipment.php">Browse equipment</a></div></section><?php require __DIR__ . '/includes/footer.php'; ?>
